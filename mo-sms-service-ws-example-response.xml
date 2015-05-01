@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mo="http://ws.orange.pl/mo-sms-service-ws">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mo:DeliverShortMessageResponse>
+            <mo:DeliverShortMessageReturn>true</mo:DeliverShortMessageReturn>
+        </mo:DeliverShortMessageResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

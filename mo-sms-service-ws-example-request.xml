@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mo="http://ws.orange.pl/mo-sms-service-ws">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mo:DeliverShortMessage>
+            <mo:sms>
+                <mo:recipient>12345</mo:recipient>
+                <mo:originator>500111222</mo:originator>
+                <mo:content>TEST - wiadomosc na LA 12345</mo:content>
+                <mo:transactionId>d4b550bf40207900</mo:transactionId>
+                <mo:timestamp>2014-01-01T01:00:00</mo:timestamp>
+            </mo:sms>
+        </mo:DeliverShortMessage>
+    </soapenv:Body>
+</soapenv:Envelope>
