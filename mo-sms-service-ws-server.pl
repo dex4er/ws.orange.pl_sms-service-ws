@@ -14,6 +14,7 @@ use strict;
 use XML::Compile::SOAP::Daemon::PSGI;
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
+use XML::LibXML;
 
 use Log::Report syntax => 'LONG';
 
@@ -21,8 +22,12 @@ dispatcher PERL => 'default', mode => 'VERBOSE';
 
 my $wsdl_filename = 'mo-sms-service-ws.wsdl';
 
+my $wsdl_dom = XML::LibXML->load_xml(location => $wsdl_filename);
+my $imports = $wsdl_dom->find('/wsdl:definitions/wsdl:types/xsd:schema/xsd:import');
+my @schemas = map { $_->getAttribute('schemaLocation') } $imports->get_nodelist;
+
 my $wsdl = XML::Compile::WSDL11->new($wsdl_filename);
-$wsdl->importDefinitions(['mo-sms-service-ws.xsd']);
+$wsdl->importDefinitions(@schemas);
 
 my $daemon = XML::Compile::SOAP::Daemon::PSGI->new;
 
