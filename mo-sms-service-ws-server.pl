@@ -33,14 +33,14 @@ $daemon->operationsFromWSDL(
             my ($soap, $data) = @_;
             # your code here
             return +{
-                DeliverShortMessageReturn => 1,
+                DeliverShortMessageReturn => 'true',
             };
         },
         DeliverNotification => sub {
             my ($soap, $data) = @_;
             # your code here
             return +{
-                DeliverNotificationResponse => 1,
+                DeliverNotificationResponse => 'true',
             };
         },
     },
@@ -56,7 +56,7 @@ my $sms_receiver_ws_app = $daemon->to_app;
 use Plack::Builder;
 
 my $app = builder {
-    enable 'TrafficLog';
+    enable 'TrafficLog', with_body => 1;
     $sms_receiver_ws_app;
 };
 

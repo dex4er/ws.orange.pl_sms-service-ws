@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- version="1.0" comment="" -->
+<wsdl:definitions
+    targetNamespace="http://ws.orange.pl/mt-sms-service-ws"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:apachesoap="http://xml.apache.org/xml-soap"
+    xmlns:mt="http://ws.orange.pl/mt-sms-service-ws"
+    xmlns:exc="http://ws.orange.pl/mt-sms-service-ws/exception"
+    xmlns:mes="http://ws.orange.pl/mt-sms-service-ws/message"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        ------------------------------------------------------------------------------------------
+        Contract interface documentation
+        --------------------------------
+        Document release: V2_04
+        Author (entity): AMG.net
+        Creation date: 01/07/2014
+        Description: mt-sms-service-ws contract interface
+        ------------------------------------------------------------------------------------------
+        Changes history
+        ---------------
+        Version Date Comments
+        V2_01 01/10/2013 WSDL contract
+        V2_04 01/07/2014 WSDL contract update, new optional field: deliveryNotificationType
+        ------------------------------------------------------------------------------------------
+    </wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema elementFormDefault="unqualified">
+            <xsd:import namespace="http://ws.orange.pl/mt-sms-service-ws" schemaLocation="mt-sms-service-ws.xsd" />
+            <xsd:import namespace="http://ws.orange.pl/mt-sms-service-ws/message" schemaLocation="mt-sms-service-ws-message.xsd" />
+            <xsd:import namespace="http://ws.orange.pl/mt-sms-service-ws/exception" schemaLocation="mt-sms-service-ws-exception.xsd" />
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="SubmitShortMessageRequest">
+        <wsdl:part element="mt:SubmitShortMessage" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="SubmitShortMessageResponse">
+        <wsdl:part element="mt:SubmitShortMessageResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="SubmitBinaryMessageRequest">
+        <wsdl:part element="mt:SubmitBinaryMessage" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="SubmitBinaryMessageResponse">
+        <wsdl:part element="mt:SubmitBinaryMessageResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="SecurityHeader">
+        <wsdl:part element="mt:Security" name="SecurityKey" />
+    </wsdl:message>
+    <wsdl:message name="SubmitException">
+        <wsdl:part element="exc:SubmitException" name="fault" />
+    </wsdl:message>
+    <wsdl:portType name="MtSmsServiceWs">
+        <wsdl:operation name="SubmitShortMessage">
+            <wsdl:input message="mt:SubmitShortMessageRequest" name="SubmitShortMessageRequest" />
+            <wsdl:output message="mt:SubmitShortMessageResponse" name="SubmitShortMessageResponse" />
+            <wsdl:fault message="mt:SubmitException" name="SubmitException" />
+        </wsdl:operation>
+        <wsdl:operation name="SubmitBinaryMessage">
+            <wsdl:input message="mt:SubmitBinaryMessageRequest" name="SubmitBinaryMessageRequest" />
+            <wsdl:output message="mt:SubmitBinaryMessageResponse" name="SubmitBinaryMessageResponse" />
+            <wsdl:fault message="mt:SubmitException" name="SubmitException" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MtSmsServiceWsSoapBinding" type="mt:MtSmsServiceWs">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="SubmitShortMessage">
+            <wsdlsoap:operation soapAction="http://ws.orange.pl/mt-sms-service-ws/submitshortmessage" />
+            <wsdl:input name="SubmitShortMessageRequest">
+                <wsdlsoap:body use="literal" />
+                <wsdlsoap:header message="mt:SecurityHeader" part="SecurityKey" use="literal" />
+            </wsdl:input>
+            <wsdl:output name="SubmitShortMessageResponse">
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="SubmitException">
+                <wsdlsoap:fault name="SubmitException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SubmitBinaryMessage">
+            <wsdlsoap:operation soapAction="http://ws.orange.pl/mt-sms-service-ws/submitbinarymessage" />
+            <wsdl:input name="SubmitBinaryMessageRequest">
+                <wsdlsoap:body use="literal" />
+                <wsdlsoap:header message="mt:SecurityHeader" part="SecurityKey" use="literal" />
+            </wsdl:input>
+            <wsdl:output name="SubmitBinaryMessageResponse">
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="SubmitException">
+                <wsdlsoap:fault name="SubmitException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MtSmsWebService">
+        <wsdl:port binding="mt:MtSmsServiceWsSoapBinding" name="MtSmsServiceWs">
+            <wsdlsoap:address location="https://ws.orange.pl/mt-sms-service-ws/" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

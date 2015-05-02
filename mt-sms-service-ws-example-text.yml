@@ -1,0 +1,10 @@
+SubmitShortMessage:
+    SecurityKey:
+        username: LOGIN
+        password: PASS
+    parameters:
+        sms:
+            content: TEST - wiadomość z polskimi znakami
+            expiryDate: 2014-01-01T12:00:00
+            recipient: 507998000
+            originator: 12345
