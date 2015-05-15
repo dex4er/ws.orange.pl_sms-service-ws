@@ -11,6 +11,8 @@
 use warnings;
 use strict;
 
+use FindBin;
+
 use XML::Compile::SOAP::Daemon::PSGI;
 use XML::Compile::WSDL11;
 use XML::Compile::SOAP11;
@@ -20,7 +22,7 @@ use Log::Report syntax => 'LONG';
 
 dispatcher PERL => 'default', mode => 'VERBOSE';
 
-my $wsdl_filename = 'mo-sms-service-ws.wsdl';
+my $wsdl_filename = "$FindBin::Bin/mo-sms-service-ws.wsdl";
 
 my $wsdl_dom = XML::LibXML->load_xml(location => $wsdl_filename);
 my $imports = $wsdl_dom->find('/wsdl:definitions/wsdl:types/xsd:schema/xsd:import');
